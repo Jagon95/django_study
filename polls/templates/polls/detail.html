@@ -12,3 +12,7 @@
     {% endfor %}
     <input type="submit" value="Vote"/>
 </form>
+<form action="{% url 'polls:like' question.id %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Like">
+</form>
