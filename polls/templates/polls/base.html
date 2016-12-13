@@ -1,0 +1,25 @@
+<!DOCTYPE>
+<html>
+<head>
+    {% block css %}{% endblock css %}
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <style>
+        body {
+            padding-bottom: 20px;
+            padding-top: 70px;
+        }
+        .messages {
+            list-style: none;
+        }
+
+    </style>
+
+</head>
+<body>
+<div class="container">
+    {% block content %}{% endblock content %}
+</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+{% block js %}{% endblock js %}
+</body>
+</html>

@@ -33,6 +33,8 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'logsys',
     'crispy_forms',
+    'bootstrap',
+    'datetimewidget',
     'polls.apps.PollsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -110,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC+03:00'
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 

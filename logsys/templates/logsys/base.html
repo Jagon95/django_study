@@ -25,9 +25,15 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">PyCon Survival Guide</a>
+            <!--<a class="navbar-brand" href="#">PyCon Survival Guide</a>-->
         </div>
-        <div class="navbar-collapse collapse">
+        <div class="navbar-collapse collapse right">
+            {% if not user.is_authenticated %}
+            <a href="{% url 'logsys:signup' %}" class="btn btn-default navbar-btn">Register</a>
+            <a href="{% url 'logsys:login' %}" class="btn btn-default navbar-btn">Login</a>
+            {% else %}
+            <a href="{% url 'logsys:logout' %}" class="btn btn-default navbar-btn">Logout</a>
+            {% endif %}
         </div><!--/.navbar-collapse -->
     </div>
 </div>

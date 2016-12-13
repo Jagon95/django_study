@@ -1,0 +1,23 @@
+{% extends 'polls/base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static '/admin/css/forms.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/base.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/global.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/widgets.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/css/bootstrap.css' %}"/>
+    {{ form.media }}
+{% endblock %}
+{% block content %}
+<form action="{% url 'polls:test_form' %}" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit" />
+</form>
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript" src="{% static 'admin/js/core.js' %}"></script>
+    <script src="{% static 'polls/js/bootstrap.js' %}"></script>
+{% endblock %}

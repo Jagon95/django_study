@@ -8,6 +8,7 @@ from .models import Question, Choice
 from django.views import generic
 from django.utils import timezone
 from .strings import *
+from .forms import NameForm, TestForm, QuestionForm, ChoiceForm
 
 
 class IndexView(generic.ListView):
@@ -61,3 +62,57 @@ def like(request, question_id):
     question.likes = F('likes') + 1
     question.save()
     return HttpResponseRedirect(reverse('polls:detail', args=(question.id,)))
+
+
+def get_name(request):
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = NameForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            return HttpResponseRedirect('/thanks/')
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = NameForm()
+
+    return render(request, 'polls/name.html', {'form': form})
+
+
+def test_form(request):
+    if request.method == 'POST':
+        form = TestForm(request.POST)
+        if form.is_valid():
+            # print(form['question_text'])
+            return HttpResponseRedirect('polls:index')
+    else:
+        form = TestForm
+
+    return render(request, 'polls/test_form.html', {'form': form})
+
+
+def test_form2(request):
+    if request.method == 'POST':
+        question_form = QuestionForm(request.POST)
+        choice_form = ChoiceForm(request.POST)
+        if question_form.is_valid() and choice_form.is_valid():
+            question = question_form.save()
+            choice = Choice(
+                choice_text=choice_form.cleaned_data['choice_text'],
+                question=question, )
+            choice.save()
+            # messages.success(request, _('Your profile was successfully updated!'))
+            return HttpResponseRedirect(reverse('polls:detail', args=(question.id,)))
+        # else:
+            # messages.error(request, _('Please correct the error below.'))
+    else:
+        question_form = QuestionForm()
+        choice_form = ChoiceForm()
+    return render(request, 'polls/test_form2.html', {
+        'question_form': question_form,
+        'choice_form': choice_form
+    })
